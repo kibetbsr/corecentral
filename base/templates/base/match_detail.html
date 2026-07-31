@@ -20,12 +20,12 @@
 </section>
 
 <section class="py-5 bg-white">
-  <div class="container" style="max-width: 600px;">
+  <div class="container" style="max-width: 700px;">
     {% if match.scorers.all %}
 
-    <div class="row">
+    <div class="row text-center">
       <div class="col-6">
-        
+        <h6 class="mb-3" style="color: var(--kc-green-dark);">{{ match.home_team }}</h6>
         <div class="scorer-list">
           {% for goal in match.scorers.all %}
             {% if goal.team == 'HOME' %}
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="col-6">
-        
+        <h6 class="mb-3" style="color: var(--kc-green-dark);">{{ match.away_team }}</h6>
         <div class="scorer-list">
           {% for goal in match.scorers.all %}
             {% if goal.team == 'AWAY' %}
@@ -55,10 +55,12 @@
     </div>
 
 {% else %}
-  <p class="text-muted">No goal scorers recorded for this match.</p>
+  <p class="text-muted text-center">No goal scorers recorded for this match.</p>
 {% endif %}
 
-    <a href="{% url 'matches:fixtures' %}" class="btn btn-gold mt-4">&larr; Back to Fixtures</a>
+    <div class="text-center">
+      <a href="{% url 'matches:fixtures' %}" class="btn btn-gold mt-4">&larr; Back to Fixtures</a>
+    </div>
   </div>
 </section>
 {% endblock %}
