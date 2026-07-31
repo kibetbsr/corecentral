@@ -78,9 +78,11 @@
                 </span>
                 <span class="small text-muted">{{ match.competition }}</span>
               </div>
-              <h5 class="mb-1" style="color: var(--kc-green-dark);">
-                {{ match.home_team }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team }}
-              </h5>
+              <h5 class="mb-1">
+  <span class="team-name-inline">{{ match.home_team }}</span>
+  <span class="score-inline">{{ match.home_score }} - {{ match.away_score }}</span>
+  <span class="team-name-inline">{{ match.away_team }}</span>
+</h5>
               <p class="small text-muted mb-0">
                 {{ match.match_date|date:"d M Y" }} &bull;
                 {% if match.kipsolu_side == 'HOME' %}Home{% elif match.kipsolu_side == 'AWAY' %}Away{% endif %}
