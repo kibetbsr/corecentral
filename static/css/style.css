@@ -344,3 +344,49 @@ footer.footer-kc .social-icons a:hover {
   .hero-kc { padding: 3rem 0 2.5rem; text-align: center; }
   .navbar-kc .navbar-brand small { display: none; }
 }
+
+/*REYULTS CSS*/
+.result-card-kc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-row-kc {
+  column-gap: 0.75rem;
+  row-gap: 0.5rem;
+  width: 100%;
+}
+
+.result-team-name {
+  font-weight: 600;
+  color: var(--kc-green-dark);
+  flex: 1 1 auto;
+  min-width: 90px;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+}
+
+.score-pill-kc {
+  background: #1a1a1a;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.result-report-btn {
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+}
+
+@media (max-width: 360px) {
+  .result-team-name {
+    flex: 1 1 100%;
+    text-align: center !important;
+  }
+  .score-pill-kc {
+    order: -1;
+  }
+}
