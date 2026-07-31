@@ -1,0 +1,176 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Squad — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">Meet The Team</p>
+    <h1>OUR SQUAD</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+
+    <!-- Filter buttons -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" role="group" aria-label="Filter squad by position">
+      <button class="btn btn-gold squad-filter-btn active" data-filter="all">All</button>
+      <button class="btn btn-outline-gold squad-filter-btn" data-filter="GK">Goalkeepers</button>
+      <button class="btn btn-outline-gold squad-filter-btn" data-filter="DF">Defenders</button>
+      <button class="btn btn-outline-gold squad-filter-btn" data-filter="MF">Midfielders</button>
+      <button class="btn btn-outline-gold squad-filter-btn" data-filter="FW">Forwards</button>
+    </div>
+
+    <div class="row g-4" id="squad-grid">
+      {% for player in goalkeepers %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 squad-card-wrap" data-position="{{ player.position }}">
+        <a href="{% url 'team:player_detail' player.pk %}" class="text-decoration-none">
+          <div class="card card-kc player-card position-relative h-100">
+            <span class="squad-number">{{ player.squad_number }}</span>
+            <div class="player-photo-wrap">
+              {% if player.photo %}
+              <img src="{{ player.photo.url }}" alt="{{ player.full_name }}" class="img-fluid">
+              {% else %}
+              <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ player.full_name }}" width="70">
+              {% endif %}
+            </div>
+            <div class="card-body text-center">
+              <h6 class="mb-1" style="color: var(--kc-green-dark);">{{ player.full_name }}</h6>
+              <span class="badge badge-kc-upcoming">{{ player.get_position_display }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% for player in defenders %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 squad-card-wrap" data-position="{{ player.position }}">
+        <a href="{% url 'team:player_detail' player.pk %}" class="text-decoration-none">
+          <div class="card card-kc player-card position-relative h-100">
+            <span class="squad-number">{{ player.squad_number }}</span>
+            <div class="player-photo-wrap">
+              {% if player.photo %}
+              <img src="{{ player.photo.url }}" alt="{{ player.full_name }}" class="img-fluid">
+              {% else %}
+              <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ player.full_name }}" width="70">
+              {% endif %}
+            </div>
+            <div class="card-body text-center">
+              <h6 class="mb-1" style="color: var(--kc-green-dark);">{{ player.full_name }}</h6>
+              <span class="badge badge-kc-upcoming">{{ player.get_position_display }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% for player in midfielders %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 squad-card-wrap" data-position="{{ player.position }}">
+        <a href="{% url 'team:player_detail' player.pk %}" class="text-decoration-none">
+          <div class="card card-kc player-card position-relative h-100">
+            <span class="squad-number">{{ player.squad_number }}</span>
+            <div class="player-photo-wrap">
+              {% if player.photo %}
+              <img src="{{ player.photo.url }}" alt="{{ player.full_name }}" class="img-fluid">
+              {% else %}
+              <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ player.full_name }}" width="70">
+              {% endif %}
+            </div>
+            <div class="card-body text-center">
+              <h6 class="mb-1" style="color: var(--kc-green-dark);">{{ player.full_name }}</h6>
+              <span class="badge badge-kc-upcoming">{{ player.get_position_display }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% for player in forwards %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 squad-card-wrap" data-position="{{ player.position }}">
+        <a href="{% url 'team:player_detail' player.pk %}" class="text-decoration-none">
+          <div class="card card-kc player-card position-relative h-100">
+            <span class="squad-number">{{ player.squad_number }}</span>
+            <div class="player-photo-wrap">
+              {% if player.photo %}
+              <img src="{{ player.photo.url }}" alt="{{ player.full_name }}" class="img-fluid">
+              {% else %}
+              <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ player.full_name }}" width="70">
+              {% endif %}
+            </div>
+            <div class="card-body text-center">
+              <h6 class="mb-1" style="color: var(--kc-green-dark);">{{ player.full_name }}</h6>
+              <span class="badge badge-kc-upcoming">{{ player.get_position_display }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% if not players %}
+      <p class="text-center text-muted">No players have been added yet. Add players via the Django admin panel.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-kc-green">
+  <div class="container">
+    <p class="section-tagline text-center">Backroom</p>
+    <h2 class="text-center text-white mb-4">Coaching &amp; Staff</h2>
+    <div class="row g-4 justify-content-center">
+      {% for member in staff %}
+      <div class="col-12 col-sm-6 col-md-3 text-center">
+        <div class="card card-kc h-100">
+          <div class="player-photo-wrap" style="aspect-ratio: 1/1;">
+            {% if member.photo %}
+            <img src="{{ member.photo.url }}" alt="{{ member.full_name }}" class="img-fluid">
+            {% else %}
+            <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ member.full_name }}" width="60">
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <h6 style="color: var(--kc-green-dark);">{{ member.full_name }}</h6>
+            <span class="badge badge-kc-upcoming">{{ member.get_role_display }}</span>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-white-50 text-center">Staff profiles will appear here once added via the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Vanilla JS squad position filter (no framework)
+  document.addEventListener('DOMContentLoaded', function () {
+    var buttons = document.querySelectorAll('.squad-filter-btn');
+    var cards = document.querySelectorAll('.squad-card-wrap');
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        buttons.forEach(function (b) {
+          b.classList.remove('btn-gold', 'active');
+          b.classList.add('btn-outline-gold');
+        });
+        btn.classList.add('btn-gold', 'active');
+        btn.classList.remove('btn-outline-gold');
+
+        var filter = btn.getAttribute('data-filter');
+        cards.forEach(function (card) {
+          if (filter === 'all' || card.getAttribute('data-position') === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}

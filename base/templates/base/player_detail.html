@@ -1,0 +1,65 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}{{ player.full_name }} — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">Player Profile</p>
+    <h1>#{{ player.squad_number }} {{ player.full_name|upper }}</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="card card-kc">
+          <div class="player-photo-wrap">
+            {% if player.photo %}
+            <img src="{{ player.photo.url }}" alt="{{ player.full_name }}" class="img-fluid">
+            {% else %}
+            <img src="{% static 'img/kc-crestmod.svg' %}" alt="{{ player.full_name }}" width="90">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <span class="badge badge-kc-upcoming mb-2">{{ player.get_position_display }}</span>
+        <h2 style="color: var(--kc-green-dark);">{{ player.full_name }}</h2>
+        <ul class="list-unstyled">
+          <li><strong>Nationality:</strong> {{ player.nationality }}</li>
+          {% if player.date_of_birth %}<li><strong>Date of Birth:</strong> {{ player.date_of_birth|date:"d M Y" }}</li>{% endif %}
+          {% if player.height_cm %}<li><strong>Height:</strong> {{ player.height_cm }} cm</li>{% endif %}
+          {% if player.joined_date %}<li><strong>Joined Club:</strong> {{ player.joined_date|date:"d M Y" }}</li>{% endif %}
+        </ul>
+
+        <div class="row text-center g-3 my-3">
+          <div class="col-3">
+            <div class="card-kc p-2"><h4 class="text-gold mb-0">{{ player.appearances }}</h4><small>Apps</small></div>
+          </div>
+          <div class="col-3">
+            <div class="card-kc p-2"><h4 class="text-gold mb-0">{{ player.goals }}</h4><small>Goals</small></div>
+          </div>
+          <div class="col-3">
+            <div class="card-kc p-2"><h4 class="text-gold mb-0">{{ player.assists }}</h4><small>Assists</small></div>
+          </div>
+          <div class="col-3">
+            <div class="card-kc p-2"><h4 class="text-gold mb-0">{{ player.clean_sheets }}</h4><small>Clean Sheets</small></div>
+          </div>
+        </div>
+
+        {% if player.bio %}
+        <p>{{ player.bio }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{% url 'team:squad' %}" class="btn btn-outline-gold">&larr; Back to Squad</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

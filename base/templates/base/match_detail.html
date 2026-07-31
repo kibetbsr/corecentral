@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+{% block title %}{{ match.home_team }} {{ match.home_score }}-{{ match.away_score }} {{ match.away_team }}{% endblock %}
+
+{% block content %}
+<section class="hero-kc py-5 text-center text-white" style="background: var(--kc-green-dark);">
+  <div class="container">
+    <p class="mb-2">{{ match.get_competition_display }}</p>
+    <p class="mb-4">{{ match.match_date|date:"D, d F Y" }} &bull; {{ match.stadium }}</p>
+
+    <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+      <h2 class="mb-0">{{ match.home_team }}</h2>
+      <div class="px-4 py-2 rounded" style="background: rgba(255,255,255,0.15);">
+        <h1 class="mb-0">{{ match.score_display }}</h1>
+      </div>
+      <h2 class="mb-0">{{ match.away_team }}</h2>
+    </div>
+
+    
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container" style="max-width: 600px;">
+    {% if match.scorers.all %}
+
+    <div class="row">
+      <div class="col-6">
+        
+        <div class="scorer-list">
+          {% for goal in match.scorers.all %}
+            {% if goal.team == 'HOME' %}
+            <div class="mb-2">
+                {{ goal.player_name }}
+                {% if goal.is_extra_time %}<span class="scorer-penalty">(ET)</span>{% endif %}
+                {% if goal.is_penalty %}<span class="scorer-penalty">(P)</span>{% endif %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-6">
+        
+        <div class="scorer-list">
+          {% for goal in match.scorers.all %}
+            {% if goal.team == 'AWAY' %}
+            <div class="mb-2">
+                {{ goal.player_name }}
+                {% if goal.is_extra_time %}<span class="scorer-penalty">(ET)</span>{% endif %}
+                {% if goal.is_penalty %}<span class="scorer-penalty">(P)</span>{% endif %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+{% else %}
+  <p class="text-muted">No goal scorers recorded for this match.</p>
+{% endif %}
+
+    <a href="{% url 'matches:fixtures' %}" class="btn btn-gold mt-4">&larr; Back to Fixtures</a>
+  </div>
+</section>
+{% endblock %}

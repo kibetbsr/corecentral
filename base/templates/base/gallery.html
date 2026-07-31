@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Gallery — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">Momentos</p>
+    <h2>Momentos Centrales</h2>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-3">
+      {% for image in images %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="gallery-thumb" 
+             data-full="{{ image.image.url }}" 
+             data-caption="{{ image.caption|default:image.title }}"
+             data-taken-at="{% if image.taken_at %}{{ image.taken_at|date:'d-m-Y' }}{% endif %}">
+          <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy">
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted">No images yet. Add some via the Django admin panel.</p>
+      {% endfor %}
+    </div>         
+  </div>
+</section>
+
+<!-- Lightbox overlay (vanilla JS controlled) -->
+<div id="lightbox-overlay">
+  <button id="lightbox-close" aria-label="Close">&times;</button>
+  <button id="lightbox-prev" aria-label="Previous" style="position:absolute; left:1rem;">&#8249;</button>
+  <div>
+    <img id="lightbox-image" src="" alt="Enlarged gallery image">
+  <p id="lightbox-caption-row">
+  <span id="lightbox-caption"></span>
+  <span id="lightbox-taken-at-sep"> | </span>
+  <span id="lightbox-taken-at"></span>
+</p>
+  </div>
+  <button id="lightbox-next" aria-label="Next" style="position:absolute; right:1rem;">&#8250;</button>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/gallery-lightbox.js' %}"></script>
+{% endblock %}

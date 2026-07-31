@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Kipsolu Central FC{% endblock %}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/favicon-512.png' %}">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" sizes="any">
+  <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome (for social icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom KC brand styles -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSY8G2EWB4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CSY8G2EWB4');
+  </script>
+</head>
+<body>
+
+  <!-- Utility bar -->
+  <div class="utility-bar">
+    THE OFFICIAL WEBSITE OF KIPSOLU CENTRAL FC
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-kc sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'core:home' %}">
+        <img src="{% static 'img/kc-crestmod.svg' %}" alt="Kipsolu Central FC crest" width="42" height="50">
+        <span>
+          KIPSOLU CENTRAL FC
+          <small>Kipsolu &nbsp;&bull;&nbsp; Est. 1961</small>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#kcNavbar"
+              aria-controls="kcNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="kcNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:about' %}">THE CLUB</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'team:squad' %}">SQUAD</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'matches:fixtures' %}">FIXTURES</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">NEWS</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'gallery:gallery' %}">GALLERY</a></li>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a class="btn btn-kc-contact" href="{% url 'core:contact' %}">CONTACT &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'success' }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-kc">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="{% static 'img/kc-crestmod.svg' %}" alt="KC crest" width="40" height="48">
+            <div>
+              <div class="fw-bold text-white">KIPSOLU CENTRAL FC</div>
+              <small>Kipsolu &bull; Est. 1961</small>
+            </div>
+          </div>
+          <p class="footer-tagline mb-3">"Central to the core."</p>
+          <div class="social-icons">
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com/kipsolucentral_fc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com/corecentralfc/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://tiktok.com/@kipsolucentralfc/" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-md-2">
+          <h5>Club</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'core:about' %}">The Club</a></li>
+            <li><a href="{% url 'team:squad' %}">Squad</a></li>
+            <li><a href="{% url 'matches:fixtures' %}">Fixtures</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <h5>Media</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'news:news_list' %}">News</a></li>
+            <li><a href="{% url 'gallery:gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-4">
+          <h5>Visit Us</h5>
+          <p class="mb-1">Kipsolu Grounds.</p>
+          <p class="mb-0">kipsolucentralfc@gmail.com</p>
+        </div>
+      </div>
+      <hr class="border-secondary mt-4">
+      <p class="text-center small mb-0">&copy; {% now "Y" %} Kipsolu Central FC. All rights reserved. &copy;NotoriousClan</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS bundle (includes Popper, no extra frameworks) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/nav.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

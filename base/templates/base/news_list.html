@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}News — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">Club Media</p>
+    <h1>LATEST NEWS</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+      {% for post in posts %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card card-kc h-100">
+          {% if post.featured_image %}
+          <img src="{{ post.featured_image.url }}" class="img-fluid" alt="{{ post.title }}" style="aspect-ratio: 16/9; object-fit: cover;">
+          {% else %}
+          <div class="card-header-green text-center py-4">
+            <img src="{% static 'img/kc-crestmod.svg' %}" alt="" width="40">
+          </div>
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <span class="section-tagline d-block mb-1">{{ post.get_category_display }}</span>
+            <h5 class="card-title" style="color: var(--kc-green-dark);">{{ post.title }}</h5>
+            <p class="card-text small text-muted">{{ post.publish_date|date:"d M Y" }}</p>
+            <p class="card-text">{{ post.excerpt|default:post.content|truncatewords:18 }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-outline-gold mt-auto" style="width: 30%;" >Read more</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted">No news posts yet.</p>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="mt-5" aria-label="News pagination">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+{% block title %}Fixtures — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">Match Centre</p>
+    <h1>FIXTURES &amp; RESULTS</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+
+    <!-- Tabs -->
+    <ul class="nav nav-pills justify-content-center mb-4" id="fixturesTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active btn-gold me-2" id="upcoming-tab" data-bs-toggle="pill" data-bs-target="#upcoming-pane" type="button" role="tab">Upcoming</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link btn-gold me-2" id="results-tab" data-bs-toggle="pill" data-bs-target="#results-pane" type="button" role="tab">Results</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Upcoming -->
+      <div class="tab-pane fade show active" id="upcoming-pane" role="tabpanel">
+        <div class="row g-4">
+          {% for match in upcoming %}
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-kc h-100 p-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge badge-kc-upcoming">{{ match.competition }}</span>
+                <span class="small text-muted">
+                  {% if match.kipsolu_side == 'HOME' %}Home{% elif match.kipsolu_side == 'AWAY' %}Away{% endif %}
+                </span>
+              </div>
+              <h5 class="mb-1" style="color: var(--kc-green-dark);">{{ match.home_team }} <span class="text-gold">vs</span> {{ match.away_team }}</h5>
+              <p class="mb-1">{{ match.match_date|date:"D, d M Y" }} &bull; {{ match.kickoff_time|time:"H:i" }}</p>
+              <p class="small text-muted mb-0">{{ match.stadium }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <p class="text-center text-muted">No upcoming fixtures scheduled. Check back soon.</p>
+          {% endfor %}
+        </div>
+
+        {% if postponed %}
+        <h5 class="mt-5 mb-3" style="color: var(--kc-green-dark);">Postponed</h5>
+        <div class="row g-4">
+          {% for match in postponed %}
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-kc h-100 p-3">
+              <span class="badge badge-kc-postponed mb-2 align-self-start">Postponed</span>
+              <h5 class="mb-1" style="color: var(--kc-green-dark);">{{ match.home_team }} <span class="text-gold">vs</span> {{ match.away_team }}</h5>
+              <p class="mb-0 text-muted">Originally: {{ match.match_date|date:"d M Y" }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+          <!-- Results -->
+    <div class="tab-pane fade" id="results-pane" role="tabpanel">
+      <div class="row g-4">
+        {% for match in results %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="{% url 'matches:match_detail' match.pk %}" class="text-decoration-none d-block h-100">
+            <div class="card card-kc h-100 p-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge
+                  {% if match.result_label == 'WIN' %}badge-kc-win
+                  {% elif match.result_label == 'LOSS' %}badge-kc-loss
+                  {% else %}badge-kc-draw{% endif %}">
+                  {{ match.result_label }}
+                </span>
+                <span class="small text-muted">{{ match.competition }}</span>
+              </div>
+              <h5 class="mb-1" style="color: var(--kc-green-dark);">
+                {{ match.home_team }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team }}
+              </h5>
+              <p class="small text-muted mb-0">
+                {{ match.match_date|date:"d M Y" }} &bull;
+                {% if match.kipsolu_side == 'HOME' %}Home{% elif match.kipsolu_side == 'AWAY' %}Away{% endif %}
+              </p>
+            </div>
+          </a>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No completed matches yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

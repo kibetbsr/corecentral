@@ -1,0 +1,334 @@
+:root {
+  --kc-green-dark: #0B2E28;
+  --kc-green: #0F3A32;
+  --kc-green-light: #16493F;
+  --kc-gold: #C9A24B;
+  --kc-gold-light: #D4AF6A;
+  --kc-cream: #F5EFE0;
+  --kc-white: #FFFFFF;
+}
+
+body {
+  background-color: var(--kc-cream);
+  color: #1c1c1c;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, .club-heading {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* ---------- Utility bar ---------- */
+.utility-bar {
+  background-color: var(--kc-green-dark);
+  color: var(--kc-cream);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0;
+  text-align: center;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-kc {
+  background-color: var(--kc-green);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.navbar-kc .navbar-brand {
+  color: var(--kc-white) !important;
+  font-weight: 700;
+  font-family: Georgia, serif;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navbar-kc .navbar-brand small {
+  display: block;
+  color: var(--kc-gold-light);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.navbar-kc .nav-link {
+  color: var(--kc-cream) !important;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin: 0 0.35rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-kc .nav-link:hover,
+.navbar-kc .nav-link.active {
+  color: var(--kc-gold) !important;
+  border-bottom-color: var(--kc-gold);
+}
+
+
+
+.btn-kc-contact {
+  border: 2px solid var(--kc-gold);
+  color: var(--kc-gold) !important;
+  font-weight: 700;
+  padding: 0.4rem 1.1rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-kc-contact:hover {
+  background-color: var(--kc-gold);
+  color: var(--kc-green-dark) !important;
+}
+
+/* ---------- Buttons ---------- */
+.btn-gold {
+  background-color: var(--kc-gold);
+  border-color: var(--kc-gold);
+  color: var(--kc-green-dark);
+  font-weight: 700;
+}
+.btn-gold:hover {
+  background-color: var(--kc-gold-light);
+  border-color: var(--kc-gold-light);
+  color: var(--kc-green-dark);
+}
+
+.btn-outline-gold {
+  border: 2px solid var(--kc-gold);
+  color: var(--kc-gold);
+  font-weight: 700;
+  background-color: transparent;
+}
+.btn-outline-gold:hover {
+  background-color: var(--kc-gold);
+  color: var(--kc-green-dark);
+}
+
+/* ---------- Hero ---------- */
+.hero-kc {
+  background: linear-gradient(135deg, var(--kc-green-dark) 0%, var(--kc-green) 60%, var(--kc-green-light) 100%);
+  color: var(--kc-white);
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-kc h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hero-kc .gold-underline {
+  display: inline-block;
+  border-bottom: 4px solid var(--kc-gold);
+  padding-bottom: 0.15em;
+}
+
+.text-gold { color: var(--kc-gold) !important; }
+.bg-kc-green { background-color: var(--kc-green) !important; }
+.bg-kc-green-dark { background-color: var(--kc-green-dark) !important; }
+
+/* ---------- Section taglines / pull quotes ---------- */
+.pull-quote {
+  border-left: 4px solid var(--kc-gold);
+  padding: 0.5rem 1.2rem;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--kc-green-dark);
+}
+
+.section-tagline {
+  color: var(--kc-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* ---------- Cards ---------- */
+.card-kc {
+  border: 1px solid rgba(11, 46, 40, 0.12);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--kc-white);
+}
+.card-kc:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.75rem 1.5rem rgba(11, 46, 40, 0.15);
+  border: 1px solid var(--kc-gold-light);
+}
+/* Reserve a consistent 2-line title height on fixture cards so the
+   Match Details button never shifts position based on team name length */
+
+.card-kc .card-header-green {
+  background-color: var(--kc-green-dark);
+  color: var(--kc-gold);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- Badges ---------- */
+.badge-kc-upcoming { background-color: var(--kc-gold); color: var(--kc-green-dark); }
+.badge-kc-win { background-color: #2E7D4F; color: #fff; }
+.badge-kc-loss { background-color: #A93F3F; color: #fff; }
+.badge-kc-draw { background-color: #6c757d; color: #fff; }
+.badge-kc-postponed { background-color: #8a6d3b; color: #fff; }
+
+/* ---------- Player cards ---------- */
+.player-card .player-photo-wrap {
+  background-color: var(--kc-green-dark);
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.player-card .squad-number {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: var(--kc-gold);
+  color: var(--kc-green-dark);
+  font-weight: 800;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Footer ---------- */
+footer.footer-kc {
+  background-color: var(--kc-green-dark);
+  color: var(--kc-cream);
+  padding: 3rem 0 1.5rem;
+}
+footer.footer-kc a { color: var(--kc-cream); text-decoration: none; }
+footer.footer-kc a:hover { color: var(--kc-gold); }
+footer.footer-kc h5 { color: var(--kc-gold); font-family: Georgia, serif; }
+.footer-tagline {
+  color: var(--kc-gold-light);
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+/* ---------- Gallery lightbox ---------- */
+.gallery-thumb {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  aspect-ratio: 4/3;
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.gallery-thumb:hover img { transform: scale(1.01); }
+#lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(11, 46, 40, 0.92);
+  z-index: 1055;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+#lightbox-overlay.active { display: flex; }
+#lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border: 3px solid var(--kc-gold);
+  border-radius: 0.3rem;
+}
+#lightbox-close, #lightbox-prev, #lightbox-next {
+  color: var(--kc-gold);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+#lightbox-close { position: absolute; top: 1rem; right: 1.5rem; }
+#lightbox-caption-row {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+#lightbox-caption {
+  color: var(--kc-cream);
+  font-weight: 600;
+}
+#lightbox-taken-at-sep,
+#lightbox-taken-at {
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+/* ---------- Timeline (About page) ---------- */
+.timeline-kc {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 3px solid var(--kc-gold);
+}
+.timeline-item { position: relative; margin-bottom: 2rem; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.4rem;
+  top: 0.2rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  background-color: var(--kc-gold);
+  border-radius: 50%;
+  border: 2px solid var(--kc-green-dark);
+}
+.timeline-year {
+  color: var(--kc-gold);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+/* ---------- Contact ---------- */
+.contact-panel {
+  background-color: var(--kc-green-dark);
+  color: var(--kc-cream);
+  border-radius: 0.5rem;
+}
+
+/* ---------- Social icons (footer) ---------- */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid var(--kc-gold);
+  border-radius: 50%;
+  color: var(--kc-gold);
+  font-size: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+footer.footer-kc .social-icons a:hover {
+  background-color: var(--kc-gold);
+  color: var(--kc-green-dark);
+}
+
+/* ---------- Responsive helpers ---------- */
+@media (max-width: 576px) {
+  .hero-kc { padding: 3rem 0 2.5rem; text-align: center; }
+  .navbar-kc .navbar-brand small { display: none; }
+}

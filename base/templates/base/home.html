@@ -1,0 +1,106 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Kipsolu Central FC — Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-kc">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-7">
+        <p class="section-tagline mb-2">Kipsolu &bull; Est. 1961</p>
+        <h2 class="mb-3">ROOTED IN <span class="gold-underline">KIPSOLU.</span></h2>
+        <p class="lead" style="max-width: 40rem;">
+          More than a football team. We are a place to belong, a platform for possibility,
+          and a badge that means something. <strong class="text-gold">Central to the core.</strong>
+          
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{% url 'team:squad' %}" class="btn btn-gold btn-lg">Meet the Squad</a>
+          <a href="{% url 'matches:fixtures' %}" class="btn btn-outline-gold btn-lg">View Fixtures</a>
+        </div>
+      </div>
+      <div class="col-12 col-lg-5 text-center mt-5 mt-lg-0">
+        <img src="{% static 'img/kc-crestmod.svg' %}" alt="Kipsolu Central FC Crest" class="img-fluid" style="max-width: 260px;">
+      </div>
+    </div> 
+  </div>
+</section>
+
+<!-- NEXT FIXTURE -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <p class="section-tagline text-center">Upcoming</p>
+    <h2 class="text-center mb-4" style="color: var(--kc-green-dark);">Next Fixture</h2>
+
+    {% if next_match %}
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card card-kc text-center p-4">
+          <span class="badge badge-kc-upcoming align-self-center mb-2">{{ next_match.competition }}</span>
+          <h3 class="mb-1">Kipsolu Central FC <span class="text-gold">vs</span> {{ next_match.opponent }}</h3>
+          <p class="mb-1">{{ next_match.match_date|date:"l, d F Y" }} &bull; {{ next_match.kickoff_time|time:"H:i" }}</p>
+          <p class="text-muted mb-0">{{ next_match.get_venue_display }} — {{ next_match.stadium }}</p>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No upcoming fixtures scheduled at the moment. Check back soon.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- LATEST NEWS -->
+<section class="py-5 bg-kc-green">
+  <div class="container">
+    <p class="section-tagline text-center">Club News</p>
+    <h2 class="text-center text-white mb-4">Latest Headlines</h2>
+
+    <div class="row g-4">
+      {% for post in latest_news %}
+      <div class="col-12 col-md-4">
+        <div class="card card-kc h-100">
+          {% if post.featured_image %}
+          <img src="{{ post.featured_image.url }}" class="img-fluid" alt="{{ post.title }}" style="aspect-ratio: 16/9; object-fit: cover;">
+          {% else %}
+          <div class="card-header-green text-center py-4">
+            <img src="{% static 'img/kc-crestmod.svg' %}" alt="" width="40">
+          </div>
+          {% endif %}
+          <div class="card-body">
+            <span class="section-tagline d-block mb-1">{{ post.get_category_display }}</span>
+            <h5 class="card-title" style="color: var(--kc-green-dark);">{{ post.title }}</h5>
+            <p class="card-text small text-muted">{{ post.publish_date|date:"d M Y" }}</p>
+            <p class="card-text">{{ post.excerpt|default:post.content|truncatewords:18 }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-outline-gold">Read more</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center text-white-50 mb-0">No news posts yet. Check back soon.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'news:news_list' %}" class="btn btn-gold">All News</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 bg-white">
+  <div class="container text-center">
+    <p class="pull-quote mx-auto" style="max-width: 42rem;">
+      "A place to belong, a platform for possibility, and a badge that means something."
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+      <a href="{% url 'core:about' %}" class="btn btn-gold btn-lg">Our Story</a>
+      <a href="{% url 'core:contact' %}" class="btn btn-outline-gold btn-lg">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

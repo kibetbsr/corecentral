@@ -1,0 +1,76 @@
+{% extends "base/base.html" %}
+{% block title %}The Club — Kipsolu Central FC{% endblock %}
+
+{% block content %}
+
+<section class="hero-kc py-4">
+  <div class="container text-center">
+    <p class="section-tagline mb-2">The Club</p>
+    <h1>Chi Siamo</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-12 col-lg-6">
+        <h2 class="mb-3" style="color: var(--kc-green-dark);">Who We Are</h2>
+        <p>
+          Kipsolu Central FC was built on a simple idea: football should bring a community together and give every young player
+          in the region a fair shot at greatness.
+        </p>
+        <p>
+          More than a football team, we are a place to belong, a platform for possibility, and a
+          badge that means something to everyone who wears it — players, staff, and fans alike.
+        </p>
+        <p class="pull-quote"><span style="color: var(--kc-gold); ">G</span>reatness <span style="color: var(--kc-gold); ">A</span>chieved <span style="color: var(--kc-gold);">T</span>hrough <span style="color: var(--kc-gold);">E</span>xcellence.</p>
+        
+      </div>
+      <div class="col-12 col-lg-6">
+        
+        <h2 class="mb-3 mt-4" style="color: var(--kc-green-dark);">Mission &amp; Vision</h2>
+        <p>
+          <strong>Mission:</strong> To develop disciplined, skilful footballers through structured competition, mentorship, and access to opportunity.
+        </p>
+        <p>
+          <strong>Vision:</strong> To become an excellent community football club —
+          rooted locally, competing, and inspiring the next generation of Kipsolu.
+        </p>
+        <p class="pull-quote">Central to the Core.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-kc-green">
+  <div class="container">
+    <p class="section-tagline text-center">Milestones</p>
+    <h2 class="text-center text-white mb-5">Achievements Timeline</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <div class="timeline-kc">
+          {% for milestone in milestones %}
+          <div class="timeline-item">
+            <div class="timeline-year">{{ milestone.year }}</div>
+            <h5 class="text-white mb-1">{{ milestone.title }}</h5>
+            <p class="mb-0" style="color: var(--kc-cream);">{{ milestone.description }}</p>
+          </div>
+          {% empty %}
+          <p class="text-white-50">Achievements will appear here as the club adds them via the admin panel.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-white text-center">
+  <div class="container">
+    <h2 class="mb-3" style="color: var(--kc-green-dark);">Come Watch Us Play</h2>
+    <p class="mb-4">Join us at Kipsolu Grounds — home is where the badge means the most.</p>
+    <a href="{% url 'matches:fixtures' %}" class="btn btn-gold btn-lg">See Fixtures</a>
+  </div>
+</section>
+
+{% endblock %}
