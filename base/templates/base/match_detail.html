@@ -25,7 +25,7 @@
 
     <div class="row text-center">
       <div class="col-6">
-        <h6 class="mb-3" style="color: var(--kc-green-dark);">{{ match.home_team }}</h6>
+        <p class="mb-3" style="color: var(--kc-green-dark);font-size: x-small;">{{ match.home_team }}</p>
         <div class="scorer-list">
           {% for goal in match.scorers.all %}
             {% if goal.team == 'HOME' %}
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="col-6">
-        <h6 class="mb-3" style="color: var(--kc-green-dark);">{{ match.away_team }}</h6>
+        <p class="mb-3" style="color: var(--kc-green-dark); font-size: x-small;">{{ match.away_team }}</p>
         <div class="scorer-list">
           {% for goal in match.scorers.all %}
             {% if goal.team == 'AWAY' %}
