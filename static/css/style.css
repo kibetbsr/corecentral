@@ -339,6 +339,9 @@ footer.footer-kc .social-icons a:hover {
   color: var(--kc-green-dark);
 }
 
+.badge-kc-win { background-color: #2E7D4F; color: #fff; }
+.badge-kc-loss { background-color: #A93F3F; color: #fff; }
+.badge-kc-draw { background-color: #6c757d; color: #fff; }
 /* ---------- Responsive helpers ---------- */
 @media (max-width: 576px) {
   .hero-kc { padding: 3rem 0 2.5rem; text-align: center; }

@@ -62,40 +62,41 @@
         {% endif %}
       </div>
 
-          <!-- Results -->
-    <div class="tab-pane fade" id="results-pane" role="tabpanel">
-      <div class="row g-4">
-        {% for match in results %}
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="{% url 'matches:match_detail' match.pk %}" class="text-decoration-none d-block h-100">
-            <div class="card card-kc h-100 p-3">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge
-                  {% if match.result_label == 'WIN' %}badge-kc-win
-                  {% elif match.result_label == 'LOSS' %}badge-kc-loss
-                  {% else %}badge-kc-draw{% endif %}">
-                  {{ match.result_label }}
-                </span>
-                <span class="small text-muted">{{ match.competition }}</span>
-              </div>
-              <h5 class="mb-1">
-  <span class="team-name-inline">{{ match.home_team }}</span>
-  <span class="score-inline">{{ match.home_score }} - {{ match.away_score }}</span>
-  <span class="team-name-inline">{{ match.away_team }}</span>
-</h5>
-              <p class="small text-muted mb-0">
-                {{ match.match_date|date:"d M Y" }} &bull;
-                {% if match.kipsolu_side == 'HOME' %}Home{% elif match.kipsolu_side == 'AWAY' %}Away{% endif %}
-              </p>
-            </div>
-          </a>
+         <!-- Results -->
+<div class="tab-pane fade" id="results-pane" role="tabpanel">
+  <div class="row g-4">
+    {% for match in results %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card card-kc h-100 p-3 text-center result-card-kc">
+        <span class="badge align-self-center mb-2
+          {% if match.result_label == 'WIN' %}badge-kc-win
+          {% elif match.result_label == 'LOSS' %}badge-kc-loss
+          {% else %}badge-kc-draw{% endif %}">
+          {{ match.result_label }}
+        </span>
+
+        <p class="fw-bold mb-3">{{ match.match_date|date:"D j M Y" }}</p>
+
+        <div class="d-flex justify-content-center align-items-center flex-wrap result-row-kc mb-2">
+          <span class="result-team-name text-end">{{ match.home_team }}</span>
+          <span class="score-pill-kc">{{ match.home_score }} - {{ match.away_score }}</span>
+          <span class="result-team-name text-start">{{ match.away_team }}</span>
         </div>
-        {% empty %}
-        <p class="text-center text-muted">No completed matches yet.</p>
-        {% endfor %}
+
+        <p class="small fw-semibold mb-0">FT</p>
+        <p class="small text-muted mb-1">{{ match.competition }}</p>
+        <p class="small text-muted mb-3">{{ match.stadium }}</p>
+
+        <a href="{% url 'matches:match_detail' match.pk %}" class="btn btn-dark rounded-pill px-4 mx-auto result-report-btn">
+          Match Report
+        </a>
       </div>
     </div>
-
+    {% empty %}
+    <p class="text-center text-muted">No completed matches yet.</p>
+    {% endfor %}
+  </div>
+</div>
   </div>
 </section>
 
